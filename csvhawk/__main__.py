@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# csvhawk - Copyright (C) 2017, Walter Doekes, OSSO B.V.
+# csvhawk - Copyright (C) 2017,2025, Walter Doekes, OSSO B.V.
 #
 # This software is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as
@@ -117,7 +117,10 @@ if __name__ == '__main__':
     try:
         csv_data = csv_transform(file_ or read_stdin(), transformations)
         for row in csv_data:
-            print(row)
+            try:
+                print(row)
+            except BrokenPipeError:
+                break
 
     finally:
         if file_:
